@@ -49,11 +49,11 @@ setheadsnakesegments		lda #08 ; make snake length + 1 for the bne (so 4 = 3 segm
 							jsr setbodysegments
 							rts
 
+; set up initial body segment coordinates
 setbodysegments		lda #$c0
 					sta snakesegmentsL,x
 					lda #$04 
 					sta snakesegmentsH,x
-					cpy #04
 					inx
 					inx 
 					lda #$10
@@ -77,18 +77,17 @@ scankey			jsr scnkey
 setdirection	sta currentdirection
 				rts
 
+; check directions and send to appropriate label that will increment or decrement screen ram address
 move 			lda currentdirection
-				cmp #65 ;compare with a
+				cmp leftkey ;compare with a
 				beq left ;
-				cmp #87 ; compare with w
+				cmp upkey ; compare with w
 				beq up
-				cmp #68 ; compare with d
+				cmp rightkey ; compare with d
 				beq right
-				cmp #83 ; compare with s
+				cmp downkey ; compare with s
 				beq down
 				rts
-
-
 
 left	lda currentpositionL
 		sec
@@ -98,7 +97,6 @@ left	lda currentpositionL
 		bcc pageleft
 		
 		jsr displaynewposition
-		
 		
 		rts
 	
@@ -183,14 +181,12 @@ displaynewposition	jsr testsnakecollision
 					lda #00 ; make sure we are not carrying any weird a values that can throw move off
 					rts					
 
+; the last address pair in the snakesegments hi low chain set to black
 setblackblocktail	ldx snakelengthL
-
 					dex
 					dex
 					lda blackblock
 					ldy snakesegmentsH,x
-					sty $4001
-					stx $4002
 					cpy #$04
 					beq displaypageonesnakesegment
 					cpy #$05
@@ -202,26 +198,18 @@ setblackblocktail	ldx snakelengthL
 					rts
 
 displaypageonesnakesegment		ldy snakesegmentsL,x
-								stx $4004
-								sty $4003
 								sta $0400,y
 								rts
 
 displaypagetwosnakesegment		ldy snakesegmentsL,x
-								stx $4005
-								sty $4006
 								sta $0500,y
 								rts
 								
 displaypagethreesnakesegment	ldy snakesegmentsL,x
-								stx $4007
-								sty $4008
 								sta $0600,y
 								rts
 								
 displaypagefoursnakesegment		ldy snakesegmentsL,x
-								stx $4009
-								sty $4010
 								sta $0700,y
 								rts
 
@@ -245,7 +233,6 @@ initsnakestore			ldy snakelengthL
 						
 rotatelosnakelocations	;before popping off the last coords of the snake chain, turn that screen ram to black.
 						; must work from the end, because if we work from the start, we overwrite the third in the chain, thats why it all goes to the same value
-						; this actually works!!
 						dey
 						dey
 						lda snakesegmentsL,y
@@ -286,7 +273,6 @@ displayappleposition	lda appleblock
 						beq loadpagefouritem
 			
 						rts
-
 			
 eatapple		lda applepositionL
 			

@@ -31,9 +31,7 @@ inithomescreen	lda #$01
 				jsr printoption4
 				
 				rts
-
-finishedprinting rts
-				
+			
 printheadertext	lda menutextline1,x
 				cmp #$23
 				beq finishedprinting
@@ -84,6 +82,8 @@ printoption4	lda menutextline5,x
 				bne printoption4
 				rts
 
+finishedprinting rts
+
 printscore		lda scoretext,x
 				sta $0460,x
 				
@@ -105,6 +105,144 @@ printscore		lda scoretext,x
 				lda #01
 				sta $d867	
 				rts
+
+initcontrolsscreen		lda #$01
+						sta $d020 ; set border colour
+						lda #$00
+						sta $d021
+						ldx #00
+						jsr printcontrolsheadertext
+						ldx #00
+						jsr printcontrolsup
+						ldx #00
+						jsr printcontrolsleft
+						ldx #00
+						jsr printcontrolsdown
+						ldx #00
+						jsr printcontrolsright
+						ldx #00
+						jsr printcontrolsquit
+						ldx #00
+						jsr printcontrolsstart
+						ldx #00
+						jsr printcontrolsreturn
+						
+						rts
+
+printcontrolsheadertext		lda controlstextline1,x
+							cmp #$23
+							beq finishedprinting
+							sta $0500,x
+							lda #$01
+							sta $d900,x
+							inx
+							bne printcontrolsheadertext
+							rts
+
+printcontrolsup		lda controlstextup,x
+					cmp #$23
+					beq finishedcontrolsprinting
+					sta $0541,x
+					lda #$01
+					sta $d941,x
+					inx
+					bne printcontrolsup
+					rts
+				
+printcontrolsleft	lda controlstextleft,x
+					cmp #$23
+					beq finishedcontrolsprinting
+					sta $0569,x
+					lda #$01
+					sta $d969,x
+					inx
+					bne printcontrolsleft
+					rts
+				
+printcontrolsdown	lda controlstextdown,x
+					cmp #$23
+					beq finishedcontrolsprinting
+					sta $0591,x
+					lda #$01
+					sta $d991,x
+					inx
+					bne printcontrolsdown
+					rts
+				
+printcontrolsright	lda controlstextright,x
+					cmp #$23
+					beq finishedcontrolsprinting
+					sta $05b9,x
+					lda #$01
+					sta $d9b9,x
+					inx
+					bne printcontrolsright
+					rts
+
+printcontrolsquit	lda controlstextquit,x
+					cmp #$23
+					beq finishedcontrolsprinting
+					sta $05e1,x
+					lda #$01
+					sta $d9e1,x
+					inx
+					bne printcontrolsquit
+					rts
+
+printcontrolsstart	lda controlstextstart,x
+					cmp #$23
+					beq finishedcontrolsprinting
+					sta $0609,x
+					lda #$01
+					sta $da09,x
+					inx
+					bne printcontrolsstart
+					rts
+
+printcontrolsreturn	lda controlstextreturn,x
+					cmp #$23
+					beq finishedcontrolsprinting
+					sta $0631,x
+					lda #$01
+					sta $da31,x
+					inx
+					bne printcontrolsreturn
+					rts
+
+finishedcontrolsprinting rts
+
+initoptionsscreen		lda #$01
+						sta $d020 ; set border colour
+						lda #$00
+						sta $d021
+						ldx #00
+						jsr printoptionsheadertext
+						ldx #00
+						jsr printdiffilcultyoption
+						ldx #00
+						jsr printcontrolsreturn
+						
+						rts
+
+printoptionsheadertext	lda optionstextline1,x
+						cmp #$23
+						beq finishedcontrolsprinting
+						sta $0500,x
+						lda #$01
+						sta $d900,x
+						inx
+						bne printoptionsheadertext
+						rts
+
+printdiffilcultyoption	lda optionscomingsoon,x
+						cmp #$23
+						beq finishedcontrolsprinting
+						sta $0609,x
+						lda #$01
+						sta $da09,x
+						inx
+						bne printdiffilcultyoption
+						rts
 
 showcollisionsquarestop		lda whiteblock
 							sta $0400,x

@@ -1,6 +1,5 @@
 
-menuloop		
-			ldx #00
+menuloop	ldx #00
 			jsr showcollisionsquarestop
 			ldx #00 
 			jsr showcollisionsquaresbottom
@@ -24,27 +23,43 @@ menuloop
 			jmp menuloop
 
 menukeyscan		jsr scnkey
-			jsr getin 
-			bne menuselection ; if something else, direct us off to a place where we can institute the new value
-			rts
-
-menuselection			sta $3fff
-				cmp #$45
-				beq startgame ;gameloop
-				cmp #81
-				beq gamequit
+				jsr getin 
+				bne menuselection ; if something else, direct us off to a place where we can institute the new value
 				rts
 
-startgame			jsr $e544
+menuselection	cmp startkey
+				beq startgame ; jump to core, to start the gameloop
+				cmp quitkey
+				beq gamequit
+				cmp optionskey
+				beq showoptions
+				cmp controlskey
+				beq showcontrols
+				cmp returntomenukey
+				beq showmenu
+				rts
+
+startgame		jsr clear
 				jsr sidset
 				jsr setbodysegments
 				jsr setheadsnakesegments
 				jsr generaterandomappleposition
 				jsr displayappleposition
 				jsr gameloop
-				rts
+
+showmenu		jsr clear
+				jsr inithomescreen
+				jmp menuloop
+
+showoptions		jsr clear
+				jsr initoptionsscreen
+				jmp menuloop
+
+showcontrols	jsr clear
+				jsr initcontrolsscreen
+				jmp menuloop
 				
-borderdelay ldx #00
+borderdelay 	ldx #00
 
 borderdelaynest	inx 
 				cpx #$ff

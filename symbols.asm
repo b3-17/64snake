@@ -1,7 +1,26 @@
 
+; system pointers
 clear = $e544 ;
 scnkey = $ff94
 getin = $ffe4 ;
+ciatimerinterruptL =	$dc0d
+ciatimerinterruptH = 	$dd0d
+rasterbeam =			$d01a
+
+upkey = 		$c200
+downkey =		$c1ff
+leftkey =		$c1fe
+rightkey = 		$c1fd
+quitkey = 		$c1fc
+startkey =		$c1fb
+controlskey = 	$c1fa
+optionskey =	$c1f9
+returntomenukey = $c1f8
+currentscreen =	$c1f7
+menuscreen = 	$c1f6
+controlsscreen = $c1f5
+optionsscreen = $c1f4
+
 blackblock = 		$c201 ; background space character
 whiteblock = 		$c202 ; collision square block value
 bordercolour = 		$c203
@@ -29,3 +48,23 @@ menutextline3 !scr "c to show controls#"
 menutextline4 !scr "q to quit#"
 menutextline5 !scr "o for options#"
 scoretext     !scr "score: "
+
+controlstextline1 !scr "snake controls#"
+controlstextup !scr "w is up#"
+controlstextleft !scr "a is left#"
+controlstextdown !scr "s is down#"
+controlstextright !scr "d is right#"
+controlstextquit !scr "q to quit#"
+controlstextstart !scr "e to start#"
+controlstextreturn !scr "r to return to menu#"
+
+optionstextline1 !scr "snake options#"
+optionscomingsoon !scr "snake options coming soon#"
+
+
+
+
+
+
+
+
