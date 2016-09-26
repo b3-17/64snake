@@ -34,8 +34,6 @@
 
 !byte $31,$35,$32,$00,$00,$00           ; puts BASIC line 2012 SYS 49152 
 
-   				            ; start address for 6502 code 
-
 !source "symbols.asm"
 !source "graphics.asm"
 !source	"menu.asm"

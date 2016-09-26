@@ -1,14 +1,14 @@
 
 borderflash		sty $4001
 				
-			iny
-			cpy #01
-			beq skipcolour
-			cpy #16
-			beq resetcolour
-			sty $d020
-			bne borderflash
-			rts
+				iny
+				cpy #01
+				beq skipcolour
+				cpy #16
+				beq resetcolour
+				sty $d020
+				bne borderflash
+				rts
 
 skipcolour		jmp borderflash
 
@@ -74,7 +74,7 @@ printoption3	lda menutextline4,x
 				bne printoption3
 				rts
 				
-printoption4			lda menutextline5,x
+printoption4	lda menutextline5,x
 				cmp #$23
 				beq finishedprinting
 				sta $05b9,x
@@ -84,7 +84,7 @@ printoption4			lda menutextline5,x
 				bne printoption4
 				rts
 
-printscore			lda scoretext,x
+printscore		lda scoretext,x
 				sta $0460,x
 				
 				lda #01
@@ -106,7 +106,7 @@ printscore			lda scoretext,x
 				sta $d867	
 				rts
 
-showcollisionsquarestop					lda whiteblock
+showcollisionsquarestop		lda whiteblock
 							sta $0400,x
 							lda #01
 							sta $d800,x
@@ -115,37 +115,37 @@ showcollisionsquarestop					lda whiteblock
 							bne showcollisionsquarestop
 							rts
 							
-showcollisionsquaresbottom				lda whiteblock
-							sta $07c0,x
-							lda #01
-							sta $dbc0,x
-							inx
-							cpx #40
-							bne showcollisionsquaresbottom
-							rts
+showcollisionsquaresbottom		lda whiteblock
+								sta $07c0,x
+								lda #01
+								sta $dbc0,x
+								inx
+								cpx #40
+								bne showcollisionsquaresbottom
+								rts
 
 setzerocollisionsidesquares				lda whiteblock
-							sta $0400
-							sta $03ff
-							sta $0517
-							sta $0518
-							sta $0608
-							sta $0607
-							sta $0720
-							sta $071f
-							lda #01
-							sta $d828
-							sta $d827
-							sta $d918
-							sta $d917
-							sta $db20
-							sta $db1f
-							sta $da08
-							sta $da07
-							rts
+										sta $0400
+										sta $03ff
+										sta $0517
+										sta $0518
+										sta $0608
+										sta $0607
+										sta $0720
+										sta $071f
+										lda #01
+										sta $d828
+										sta $d827
+										sta $d918
+										sta $d917
+										sta $db20
+										sta $db1f
+										sta $da08
+										sta $da07
+										rts
 
 
-showpageonesidesquares					adc #$28
+showpageonesidesquares	    adc #$28
 							bcs iscarryset
 							tax
 							lda whiteblock
@@ -162,7 +162,7 @@ showpageonesidesquares					adc #$28
 
 iscarryset rts		
 											
-showpagetwosidesquares					adc #$28
+showpagetwosidesquares		adc #$28
 							bcs iscarryset
 							tax
 							lda whiteblock
@@ -177,7 +177,7 @@ showpagetwosidesquares					adc #$28
 
 							rts
 
-showpagethreesidesquares				adc #$28
+showpagethreesidesquares	adc #$28
 							bcs iscarryset
 							tax
 							lda whiteblock
@@ -190,9 +190,9 @@ showpagethreesidesquares				adc #$28
 			
 							bcc showpagethreesidesquares
 				
-							rts ;$;0608,da08, 0720,07c0,db20,dbe8
+							rts 
 
-showpagefoursidesquares					adc #$28
+showpagefoursidesquares		adc #$28
 							bcs iscarryset
 							tax
 							lda whiteblock
@@ -203,8 +203,6 @@ showpagefoursidesquares					adc #$28
 							sta $db1f,x
 							txa
 							bcc showpagefoursidesquares
-							;cpx #$c0
-							;bcs finishsidesquaredraw								
 							
 							rts
 
