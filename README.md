@@ -22,11 +22,15 @@ Download tarball, extract and run /src/x64 binary from terminal. To run .prgs it
 
 ASSEMBLY
 
-* In a terminal run acme index.asm (depending on permissions, elevate to sudo) (if acme is not installed to system bin, use extracted acme path). This assembles
+* In a terminal run acme path-to-file/index.asm (depending on permissions, elevate to sudo) (if acme is not installed to system bin, use extracted acme path). This assembles
 the .asm sources into a .prg file (as specified in the index.asm file)
 * From the index.asm file, sources are read to the other files in the project - make sure dependancies are in logical order (if you have a jsr or jmp or call to a symbol from one file to another, that file with the 
 reference must be included first).
 * Main.asm is the entry point to the program (where the * load instruction is located).
+
+VICE
+
+* To run in VICE, select file/smart attach disk/tape/ select assembled .prg file from file browser.
 
 CURRENT FEATURES
 
@@ -41,19 +45,19 @@ UPDATES TO COME
 * Levels - Point threasholds for levels which increase diffilculty for player and introduce different maps.
 * Graphical updates - apple and snake actually look like snakes and apples! Realistic movement animations, character attributes.
 * Diffilculty settings, playmodes - faster start speed, snake tail unpredictablility (i.e. the snake tail can break off and become an enemy), mines, random ai enemies
-* Powerups, boosts, status modifiers - invincibilty for limited periods of time (enemies have no effect, player can kill enemies),
- wrap mode (can pass from one side of the screen to the other) for a limited time, speed modifers (can slow snake speed), tail shortening (snake tail can be removed and 
- converted to points) - these modifications would balance the game.
- * Music. 
- * Move graphical commands to be run on the raster interrupt.
- * User controls setup.
+* Powerups, boosts, status modifiers - invincibilty for limited periods of time (enemies have no effect, player can kill enemies), wrap mode (can pass from one side of the screen to the other) for a limited time, speed modifers (can slow snake speed), tail shortening (snake tail can be removed and converted to points) - these modifications would balance the game.
+* Music. 
+* Move graphical commands to be run on the raster interrupt.
+* User controls setup.
+* High scores (remember the top 5 high scores).
+* Attract mode.
 
- KNOWN BUGS / ISSUES
+KNOWN BUGS / ISSUES
  
- * Text layout not centered etc.
- * Flickering in menu transition.
- * Options menu not implemented.
- * Initial start has blackblock tail.
- * Game is not balanced - diffilcult to progress much further than 30 points.
- * Apple displays in score text on occasion.
+* Text layout not centered etc.
+* Flickering in menu transition.
+* Options menu not implemented.
+* Initial start has blackblock tail.
+* Game is not balanced - diffilcult to progress much further than 30 points.
+* Apple displays in score text on occasion.
  
