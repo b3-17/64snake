@@ -24,7 +24,8 @@ testbottomcollisions		lda $10
 									
 collided					brk ; later on can put game over routine here
 						
-collisiongameover	jsr inithomescreen
+collisiongameover	jsr clear ;
+					jsr inithomescreen
 					jmp menuloop ; later on can put game over routine here	
 
 testsnakecollision	ldx currentpositionL
