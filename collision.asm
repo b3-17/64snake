@@ -24,7 +24,8 @@ testbottomcollisions		lda $10
 									
 collided					brk ; later on can put game over routine here
 						
-collisiongameover	jsr setup ; later on can put game over routine here	
+collisiongameover	jsr inithomescreen
+					jmp menuloop ; later on can put game over routine here	
 
 testsnakecollision	ldx currentpositionL
 					lda currentpositionH
@@ -38,6 +39,7 @@ testsnakecollision	ldx currentpositionL
 					beq testpagefoursnakecollision
 							
 					rts
+					
 testpageonesnakecollision	lda $0400, x
 							cmp whiteblock
 							beq collisiongameover 

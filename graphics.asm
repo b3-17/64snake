@@ -32,10 +32,21 @@ inithomescreen	lda #$01
 				
 				rts
 			
-printheadertext	lda menutextline1,x
+printheadertext	lda #$13
+				sta $0500
+				lda #$0e
+				sta $0501
+				lda #$01
+				sta $0502
+				lda #$0b
+				sta $0503
+				lda #$05 
+				sta $0504
+				lda #$21
+				sta $0505
+				lda menutextline1,x
 				cmp #$23
 				beq finishedprinting
-				sta $0500,x
 				lda #$01
 				sta $d900,x
 				inx
@@ -132,9 +143,9 @@ initcontrolsscreen		lda #$01
 printcontrolsheadertext		lda controlstextline1,x
 							cmp #$23
 							beq finishedprinting
-							sta $0500,x
+							sta $04f9,x
 							lda #$01
-							sta $d900,x
+							sta $d8f9,x
 							inx
 							bne printcontrolsheadertext
 							rts
@@ -227,9 +238,9 @@ initoptionsscreen		lda #$01
 printoptionsheadertext	lda optionstextline1,x
 						cmp #$23
 						beq finishedcontrolsprinting
-						sta $0500,x
+						sta $04f9,x
 						lda #$01
-						sta $d900,x
+						sta $d8f9,x
 						inx
 						bne printoptionsheadertext
 						rts
@@ -237,9 +248,9 @@ printoptionsheadertext	lda optionstextline1,x
 printdiffilcultyoption	lda optionscomingsoon,x
 						cmp #$23
 						beq finishedcontrolsprinting
-						sta $0609,x
+						sta $05e1,x
 						lda #$01
-						sta $da09,x
+						sta $d9e1,x
 						inx
 						bne printdiffilcultyoption
 						rts
@@ -304,8 +315,8 @@ showpagetwosidesquares		adc #$28
 							bcs iscarryset
 							tax
 							lda whiteblock
-							sta $0517,x;$0518,x
-							sta $0518,x;$0517,x
+							sta $0517,x
+							sta $0518,x
 							lda #01
 							sta $d918,x
 							sta $d917,x

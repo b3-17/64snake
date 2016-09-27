@@ -338,20 +338,64 @@ generaterandomH		lda $d41b ;
 					rts
 
 ; task the lower byte generation with all the checking if non blackblock or offscreen setting
-generaterandomL		lda $d41b
-					sta applepositionL
-					jsr storeapplenocollision
-					jsr nosideszerocollisionapple
-		
-					rts
+norightsidescollisionapple	lda applepositionL
+							cmp #$07
+							beq generaterandomL
+							cmp #$1f
+							beq generaterandomL
+							cmp #$6f
+							beq generaterandomL
+							cmp #$27
+							beq generaterandomL
+							cmp #$4f
+							beq generaterandomL
+							cmp #$77
+							beq generaterandomL
+							cmp #$9f
+							beq generaterandomL
+							cmp #$c7
+							beq generaterandomL
+							cmp #$ef
+							beq generaterandomL
+							cmp #$3f
+							beq generaterandomL
+							cmp #$67
+							beq generaterandomL
+							cmp #$8f
+							beq generaterandomL
+							cmp #$b7
+							beq generaterandomL
+							cmp #$df
+							beq generaterandomL
+							cmp #$07
+							beq generaterandomL
+							cmp #$2f
+							beq generaterandomL
+							cmp #$57
+							beq generaterandomL
+							cmp #$7f
+							beq generaterandomL
+							cmp #$a7
+							beq generaterandomL
+							cmp #$ef
+							beq generaterandomL
+							cmp #$f7
+							beq generaterandomL
+							cmp #$47
+							beq generaterandomL
+							cmp #$6f
+							beq generaterandomL
+							cmp #$97
+							beq generaterandomL
+							rts	
 
-storeapplenocollision	lda applepositionH
+storeapplenocollision	jsr noleftsidescollisionapple
+						jsr norightsidescollisionapple
+						lda applepositionH
 						cmp #$04
 						beq notopcollisionapple
 						cmp #$07			
 						beq nobottomcollisionapple
-						jsr nosideszerocollisionapple
-						lda #00
 						
 						rts
 
@@ -365,20 +409,62 @@ nobottomcollisionapple	lda applepositionL
 						bcs generaterandomL
 						rts
 
-nosideszerocollisionapple	lda applepositionL
-							cmp #$17
-							beq generaterandomL
+generaterandomL		lda $d41b
+					sta applepositionL
+					jsr storeapplenocollision
+		
+					rts
+					
+noleftsidescollisionapple	lda applepositionL
 							cmp #$18
 							beq generaterandomL
 							cmp #$08
 							beq generaterandomL
-							cmp #$07
-							beq generaterandomL
 							cmp #$20
 							beq generaterandomL
-							cmp #$1f
+							cmp #$28
 							beq generaterandomL
-							rts
+							cmp #$50
+							beq generaterandomL
+							cmp #$78
+							beq generaterandomL
+							cmp #$a0
+							beq generaterandomL
+							cmp #$c8
+							beq generaterandomL
+							cmp #$f0
+							beq generaterandomL
+							cmp #$40
+							beq generaterandomL
+							cmp #$68
+							beq generaterandomL
+							cmp #$90
+							beq generaterandomL
+							cmp #$b8
+							beq generaterandomL
+							cmp #$e0
+							beq generaterandomL
+							cmp #$08
+							beq generaterandomL
+							cmp #$30
+							beq generaterandomL
+							cmp #$58
+							beq generaterandomL
+							cmp #$80
+							beq generaterandomL
+							cmp #$a8
+							beq generaterandomL
+							cmp #$d0
+							beq generaterandomL
+							cmp #$f8
+							beq generaterandomL
+							cmp #$48
+							beq generaterandomL
+							cmp #$70
+							beq generaterandomL
+							cmp #$98
+							beq generaterandomL
+							rts	
 
 delaytop	ldx	#00
 
