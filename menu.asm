@@ -68,7 +68,7 @@ borderdelaynest	inx
 				iny
 				cpy #$ff
 				bne borderdelay
-				jsr borderflash
+				;jsr borderflash
 				rts
 
 gamequit		brk
