@@ -1,6 +1,6 @@
 # 64 SNAKE!
 
-![Alt text](repoimages/attractsnake.png?raw=true "attract snake!")
+![Alt text](https://github.com/b3-17/64snake/blob/c64snakesprites/repoimges/attractsnake.png?raw=true "attract snake!")
 
 A snake game project, built for the commodore 64 in 6502 assembly.
 
