@@ -46,6 +46,9 @@ setup	lda #81
 		lda #80
 		sta snakespeed
 		
+		lda #$7f
+		sta snakeattractdelaytimer
+		jsr initattractsprites
 		
 jsr inithomescreen
 jsr menuloop

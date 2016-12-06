@@ -42,6 +42,10 @@ snakelengthH = 		$c215 ; first and second bytes of snake length
 snakesegmentsL = 	$c216 ;
 snakesegmentsH = 	$c217 ; first and second bytes of total screen addresses in order that make up the snake (2, with lo/hi bytes)
 
+snakeheadanimationframes = 3
+snakeheadanimationcurrentframe = $c218
+snakeattractdelaytimer		= $c219
+
 menutextline1 !scr "snake!#"
 menutextline2 !scr "e to start game#"
 menutextline3 !scr "c to show controls#"

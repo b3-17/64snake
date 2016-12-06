@@ -26,7 +26,10 @@
 
 ;============================================================ 
 
-
+* = $2000
+!bin "sprites/snakeHeadAnimation.spr",256,3
+* = $2100
+!bin "sprites/snakeattractbody.spr",64,3
 
 * = $0801                                ; BASIC start address (#2049) 
 

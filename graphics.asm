@@ -1,4 +1,72 @@
 
+initattractsprites		; initialise sprite frame counters
+						lda #00
+						sta snakeheadanimationcurrentframe
+						
+						jsr enablespritesmulticolour
+						jsr setspritecolours
+						
+						jsr initsnakeheadsprite
+						jsr initsnakebodysprite
+						jsr enablesprites
+						rts ; remember to jump back to calling routine or borderflash will execute! 
+
+enablespritesmulticolour	; enable multi colour
+							lda #$03
+							sta $d01c
+							
+							rts
+							
+setspritecolours 		;set green as multi colour 1
+						lda #$05
+						sta $d025
+						
+						;set yellow as multi colour 2
+						lda #$07
+						sta $d026
+						
+						;set purple as sprite colour
+						lda #$04
+						sta $d027
+						rts
+
+enablesprites		lda #$03 
+					sta $d015
+					rts
+
+initsnakeheadsprite	lda #$80 ; set sprite block 1 x 64 into sprite 1 pointer
+					sta $07f8
+					lda #$86; set x,y for sprite, sprite one's x and y are at d000 and d001
+					sta $d000
+					lda #$40
+					sta $d001
+					rts
+						
+animatesnakehead	lda snakeheadanimationcurrentframe
+					clc
+					adc #$80 ; load initial sprite block to sprite pointer register 0 and add focus frame
+					sta $07f8
+					lda snakeheadanimationcurrentframe
+					
+					cmp #03
+					beq refreshsnakeheadframes
+					inc snakeheadanimationcurrentframe
+					
+					rts
+
+refreshsnakeheadframes	lda #$00
+						sta snakeheadanimationcurrentframe
+						rts
+
+initsnakebodysprite     lda #$84 ; set sprite block 4 x 64 into sprite 1 pointer
+						sta $07f9
+						lda #$9e ; coords
+						sta $d002
+						lda #$40
+						sta $d003
+						
+						rts
+
 borderflash		sty $4001
 				
 				iny
