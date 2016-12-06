@@ -1,7 +1,7 @@
 
 initattractsprites		; initialise sprite frame counters
 						lda #00
-						sta snakeheadanimationcurrentframe
+						sta snakeanimationcurrentframe
 						
 						jsr enablespritesmulticolour
 						jsr setspritecolours
@@ -30,7 +30,7 @@ setspritecolours 		;set green as multi colour 1
 						sta $d027
 						rts
 
-enablesprites		lda #$03 
+enablesprites		lda #$03 ; to enable sprites set bits in $d015 based by position
 					sta $d015
 					rts
 
@@ -42,21 +42,13 @@ initsnakeheadsprite	lda #$80 ; set sprite block 1 x 64 into sprite 1 pointer
 					sta $d001
 					rts
 						
-animatesnakehead	lda snakeheadanimationcurrentframe
+animatesnake		lda snakeanimationcurrentframe
 					clc
 					adc #$80 ; load initial sprite block to sprite pointer register 0 and add focus frame
 					sta $07f8
-					lda snakeheadanimationcurrentframe
-					
-					cmp #03
-					beq refreshsnakeheadframes
-					inc snakeheadanimationcurrentframe
 					
 					rts
 
-refreshsnakeheadframes	lda #$00
-						sta snakeheadanimationcurrentframe
-						rts
 
 initsnakebodysprite     lda #$84 ; set sprite block 4 x 64 into sprite 1 pointer
 						sta $07f9
@@ -65,6 +57,24 @@ initsnakebodysprite     lda #$84 ; set sprite block 4 x 64 into sprite 1 pointer
 						lda #$40
 						sta $d003
 						
+						rts
+						
+animatesnakebody	lda snakeanimationcurrentframe
+					clc
+					adc #$84 ; load initial sprite block to sprite pointer register 0 and add focus frame
+					sta $07f9
+					
+					rts
+
+checkendframe		lda snakeanimationcurrentframe
+					
+					cmp #03
+					beq refreshsnakeheadframes
+					inc snakeanimationcurrentframe
+					rts
+
+refreshsnakeheadframes	lda #$00
+						sta snakeanimationcurrentframe
 						rts
 
 borderflash		sty $4001

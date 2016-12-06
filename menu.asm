@@ -20,10 +20,12 @@ menuloop	ldx #00
 			jsr showpagefoursidesquares
 			jsr menukeyscan
 			
+			;jsr borderdelay
 			jsr generaldelay
-			jsr customdelay
-			jsr animatesnakehead
+			jsr animatesnake
+			jsr animatesnakebody
 			jsr snakemenuattract
+			jsr checkendframe
 			jmp menuloop
 
 menukeyscan		jsr scnkey
